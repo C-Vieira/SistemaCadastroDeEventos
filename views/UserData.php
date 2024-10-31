@@ -15,6 +15,11 @@
 </html>
 
 <?php
+session_start();
+
+if (!isset($_SESSION["usuario"]))
+    header("Location: ?acao=login");
+
 require_once 'controllers/UsuarioController.php';
 $controller = new UsuarioController();
 

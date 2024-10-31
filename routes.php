@@ -8,6 +8,9 @@ if (isset($_GET['acao'])) {
         case 'cadastrar':
             include 'views/userCadastro.php';
             break;
+        case 'menu':
+            include 'views/Menu.php';
+            break;
         case 'excluir':
             include "views/UserDelete.php";
             break;
@@ -16,6 +19,9 @@ if (isset($_GET['acao'])) {
             break;
         case 'mostrarTodos':
             include 'views/userView.php';
+            break;
+        case 'sair':
+            include 'views/UserLogout.php';
             break;
         default:
             echo "Ação não encontrada";

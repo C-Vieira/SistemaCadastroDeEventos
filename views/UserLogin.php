@@ -8,11 +8,31 @@
 <body>
 <h2>Login</h2>
     <form action="" method="post">
-        Id:    <input type="text" name="id" /><br />
-        Nome:  <input type="text" name="nome" /><br />
-        Email: <input type="text" name="email" /><br />
-        <input type="submit" value="Login" />
-      </form>
+        <?php
+            if(isset ($_COOKIE["lembrar_me"])){
+                $id = $_COOKIE["id_salvo"];
+                $user = $_COOKIE["usuario_logado"];
+                $email = $_COOKIE["email_salvo"];
+
+                echo "Id: <input type='text' name='id' value='$id'><br>
+                Usuário: <input type='text' name='nome' value='$user'><br>
+                Email: <input type='password' name='email' value='$email'><br>
+                <input type='submit' value='Login'>
+                Lembrar-me<input type='checkbox' name='lembrar' checked=true>";
+            }
+            else{
+                if(isset ($_COOKIE["id_salvo"])) setcookie("id_salvo", "true", time() - 3600, "/");
+                if(isset ($_COOKIE["usuario_logado"])) setcookie("usuario_logado", "true", time() - 3600, "/");
+                if(isset ($_COOKIE["email_salvo"])) setcookie("email_salvo", "true", time() - 3600, "/");
+
+                echo "Id: <input type='text' name='id'><br>
+                Usuário: <input type='text' name='nome'><br>
+                Email: <input type='text' name='email'><br>
+                <input type='submit' value='Login'>
+                Lembrar-me<input type='checkbox' name='lembrar'>";
+            }
+        ?>
+    </form>
 </body>
 </html>
 
@@ -24,9 +44,10 @@ $controller = new UsuarioController();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include_once 'models/Usuario.php';
 
-    $id = filter_var($_POST['id']);
-    $nome = filter_var($_POST['nome']);
-    $email = filter_var($_POST['email']);
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $lembrar = $_POST['lembrar'] ?? 0;
     
     $erros = array();
   
@@ -39,7 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($erros)) {
-       $controller->login($id, $nome, $email);
+       $controller->login($id, $nome, $email, $lembrar);
+    }else{
+        foreach ($erros as $erro) {
+            echo "<br>" . $erro . "<br>";
+        }
     }
 }
 

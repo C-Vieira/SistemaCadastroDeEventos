@@ -15,6 +15,11 @@
 </html>
 
 <?php
+session_start();
+
+if (!isset($_SESSION["usuario"]))
+    header("Location: ?acao=login");
+
 require_once 'controllers/UsuarioController.php';
 $controller = new UsuarioController();
 
@@ -35,6 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($erros as $erro) {
             echo $erro . "<br>";
         }
-    }  
+    }
 }
 ?>
