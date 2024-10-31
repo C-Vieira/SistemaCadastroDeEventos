@@ -5,20 +5,32 @@ if (isset($_GET['acao'])) {
         case 'login':
             include 'views/UserLogin.php';
             break;
-        case 'cadastrar':
+        case 'cadastrarUsuario':
             include 'views/userCadastro.php';
+            break;
+        case 'cadastrarEvento':
+            include 'views/EventoCadastro.php';
             break;
         case 'menu':
             include 'views/Menu.php';
             break;
-        case 'excluir':
+        case 'excluirUsuario':
             include "views/UserDelete.php";
             break;
-        case 'mostrar':
+        case 'excluirEvento':
+            include "views/EventoDelete.php";
+            break;
+        case 'mostrarUsuario':
             include 'views/userData.php';
             break;
-        case 'mostrarTodos':
+        case 'editarEvento':
+            include 'views/EventoUpdate.php';
+            break;
+        case 'mostrarTodosUsuarios':
             include 'views/userView.php';
+            break;
+        case 'mostrarTodosEventos':
+            include 'views/EventoView.php';
             break;
         case 'sair':
             include 'views/UserLogout.php';

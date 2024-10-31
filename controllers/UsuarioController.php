@@ -45,8 +45,10 @@ class UsuarioController {
           setcookie("id_salvo", $id, time() + (86400), "/");
           setcookie("usuario_logado", $nome, time() + (86400), "/");
           setcookie("email_salvo", $email, time() + (86400), "/");
-
-          header("Location: ?acao=menu");
+          
+          // Check if admin
+          if($login["admin"] == 1) header("Location: ?acao=menu");
+          else header("Location: ?acao=mostrarTodosEventos");
         } else {
           echo "Login Falhou para $nome com email: ". $email ."<br>";
           session_destroy();

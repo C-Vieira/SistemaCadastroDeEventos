@@ -24,7 +24,7 @@ class Evento {
         return $this->local;
     }
 
-    public function getLimiteDeInscricao() {
+    public function getLimite() {
         return $this->limiteDeInscricao;
     }
 }

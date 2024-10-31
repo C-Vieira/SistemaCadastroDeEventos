@@ -68,5 +68,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-echo "<br><a href=?acao=cadastrar> Criar Conta </a><br>";
+echo "<br><a href=?acao=cadastrarUsuario> Criar Conta </a><br>";
 ?>

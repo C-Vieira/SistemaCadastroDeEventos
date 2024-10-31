@@ -10,6 +10,7 @@
     <form action="" method="post">
         Nome: <input type="text" name="nome" /><br />
         Email: <input type="text" name="email" /><br />
+        Organizador: <input type='checkbox' name='admin'>
         <input type="submit" value="Cadastrar Usuário" />
       </form>
 </body>
@@ -24,19 +25,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nome = filter_var($_POST['nome']);
     $email = filter_var($_POST['email']);
+    $admin = $_POST['admin'] ?? 0;
+
+    if($admin == 'on') $admin = 1;
     
     $erros = array();
   
     if (empty($nome)) {
         $erros[] = "Campo \"Nome\" é obrigatório.";
     }
-
-    if (empty($email)) {
+    else if (empty($email)) {
         $erros[] = "Campo \"Email\" é obrigatório.";
     }
 
     if (empty($erros)) {
-       $controller->inserir(new Usuario($nome, $email));
+       $controller->inserir(new Usuario($nome, $email, $admin));
     } else {
         foreach ($erros as $erro) {
             echo $erro . "<br>";
