@@ -10,7 +10,7 @@ class EventoDAO{
         $nome = $evento->getNome();
         $data = $evento->getData();
         $local = $evento->GetLocal();
-        $limiteDeInscricao = $evento->getLimiteDeInscricao();
+        $limiteDeInscricao = $evento->getLimite();
     
         $sql = "INSERT INTO eventos (nome, data, local, limite) VALUES ('$nome', '$data', '$local', '$limiteDeInscricao')";
         if($connection->query($sql) === TRUE){
