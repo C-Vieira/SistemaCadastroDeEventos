@@ -23,7 +23,7 @@ class EventoDAO{
     }
 
     function editarEvento($id, $evento){
-        include_once 'connect.php';
+        include 'connect.php';
         include_once 'Evento.php';
     
         $novoNome = $evento->getNome();

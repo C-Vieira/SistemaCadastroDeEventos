@@ -4,7 +4,7 @@ class InscricaoDAO{
     public function __construct() { }
 
     public function inserirInscricao($inscricao){
-        include_once 'connect.php';
+        include 'connect.php';
         include_once 'Inscricao.php';
     
         $idUsuario = $inscricao->getUsuario();
@@ -21,7 +21,7 @@ class InscricaoDAO{
     }
     
     public function excluirInscricao($id){
-        include_once 'connect.php';
+        include 'connect.php';
         include_once 'Inscricao.php';
     
         $sql = "DELETE FROM inscricoes WHERE id='$id'";
