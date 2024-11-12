@@ -69,12 +69,12 @@ class EventoDAO{
     }
     
     public function getEvento($id){
-        include_once 'connect.php';
+        include 'connect.php';
         include_once 'Evento.php';
     
         $sql = "SELECT * FROM eventos WHERE id='$id'";
         $result = $connection->query($sql);
-    
+        
         $connection->close();
 
         return $result;

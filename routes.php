@@ -38,6 +38,9 @@ if (isset($_GET['acao'])) {
         case 'inscrever':
             include 'views/InscricaoView.php';
             break;
+        case 'desinscrever':
+            include 'views/DesinscricaoView.php';
+            break;
         default:
             echo "Ação não encontrada";
             break;

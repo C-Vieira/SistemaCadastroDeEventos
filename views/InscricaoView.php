@@ -4,31 +4,61 @@ session_start();
 if (!isset($_SESSION["usuario"]))
     header("Location: ?acao=login");
 
+require_once 'controllers/EventoController.php';
+$eventoController = new EventoController();
+
 require_once 'controllers/InscricaoController.php';
-$controller = new InscricaoController();
-$result = $controller->mostarTodasInscricoes();
+$inscricaoController = new InscricaoController();
 
-if ($result->num_rows > 0) {
-    
-    echo "<br>
-        <table border='2px'>
-            <tr>
-                <th>ID</th>
-                <th>ID Usuario</th>
-                <th>ID Evento</th>
-            </tr>";
+if (isset($_COOKIE["id_salvo"])) $idUsuario = $_COOKIE["id_salvo"];
 
-    foreach($result as $result){
-        echo "<tr>";
-        foreach(array_values($result) as $value){
-            echo "<td> $value </td>";
+if(isset($_GET['id'])){
+    $inscricaoController->inscrever($idUsuario, $_GET['id']);
+}else{
+    $result = $inscricaoController->mostarTodasInscricoes($idUsuario);
+
+    if ($result->num_rows > 0) {
+        
+        echo "<br>
+            <table border='2px'>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Data</th>
+                    <th>Local</th>
+                    <th>Limite</th>
+                </tr>";
+
+        while($rowInsc = mysqli_fetch_array($result)){
+            $evento = $eventoController->mostrarDadosEvento($rowInsc["evento_id"]);
+            
+            // TESTES
+            /*echo "ID Inscricao é: " . $rowInsc["id"] . " ";
+
+            if ($evento->num_rows > 0) echo "Pelo menos um item";
+            else echo "Vazio...";*/
+
+            while($row = mysqli_fetch_array($evento)){
+                ?>
+                    <tr>
+                        <td><?php echo $row["id"]; ?></td>
+                        <td><?php echo $row["nome"]; ?></td>
+                        <td><?php echo $row["data"]; ?></td>
+                        <td><?php echo $row["local"]; ?></td>
+                        <td><?php echo $row["limite"]; ?></td>
+        
+                        <td><a href="?acao=desinscrever&id=<?php echo $rowInsc["id"]; ?>" >Cancelar Inscrição</a></td>
+                    </tr>
+                <?php
+            }
         }
-        echo "</tr>";
-    }
-    echo "</table>";
+        echo "</table>";
 
-} else {
-    echo "0 resultados";
+    } else {
+        echo "0 resultados";
+    }
+
+    //echo "<br><a href='?acao=menu'> Voltar ao menu </a>";
 }
 
 ?>

@@ -17,8 +17,8 @@ class InscricaoController {
     $this->model->excluirInscricao($id);
   }
 
-  public function mostarTodasInscricoes(){
-    return $this->model->getTodasInscricoes();
+  public function mostarTodasInscricoes($idUsuario){
+    return $this->model->getTodasInscricoes($idUsuario);
   }
 
   public function inscrever($idUsuario, $idEvento){

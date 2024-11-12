@@ -6,8 +6,10 @@ create table usuarios(id int auto_increment, nome varchar(255), email varchar(25
 
 create table eventos(id int auto_increment, nome varchar(255), data varchar(255), local varchar(255), limite int, primary key(id));
 
-create table evento_usuario(id int auto_increment, user_id int, evento_id int, primary key(id), foreign key(user_id) references usuarios(id), foreign key(evento_id) references eventos(id));
+create table inscricoes(id int auto_increment, user_id int not null, evento_id int not null, primary key(id), foreign key(user_id) references usuarios(id), foreign key(evento_id) references eventos(id));
 
-alter table evento_usuario add constraint FK_user_id foreign key(user_id) references usuarios(id);
+alter table inscricoes add constraint FK_user_id foreign key(user_id) references usuarios(id);
 
-alter table evento_usuario add constraint FK_evento_id foreign key(evento_id) references eventos(id);
+alter table inscricoes add constraint FK_evento_id foreign key(evento_id) references eventos(id);
+
+alter table inscricoes add constraint UC_inscricao unique (user_id, evento_id);

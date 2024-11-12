@@ -24,6 +24,10 @@ class EventoController {
   public function mostarTodosEventos(){
     return $this->model->getTodosEventos();
   }
+
+  public function mostrarDadosEvento($id){
+    return $this->model->getEvento($id);
+  }
 }
 
 ?>

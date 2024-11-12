@@ -34,11 +34,11 @@ class InscricaoDAO{
         $connection->close();
     }
     
-    public function getTodasInscricoes(){
+    public function getTodasInscricoes($idUsuario){
         include_once 'connect.php';
         include_once 'Inscricao.php';
-    
-        $sql = "SELECT * FROM inscricoes";
+        
+        $sql = "SELECT * FROM inscricoes WHERE user_id='$idUsuario'";
         $result = $connection->query($sql);
     
         $connection->close();
