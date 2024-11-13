@@ -20,13 +20,18 @@ if(isset($_GET['id'])){
     if($evento["limite"] < 1){
         echo "Limite de Inscrições Atingido <br>";
     }else{
-        $eventoController->editar($_GET['id'], new Evento(
-            $evento["nome"],
-            $evento["data"],
-            $evento["local"],
-            ($evento["limite"] - 1)
-        ));
-        $inscricaoController->inscrever($idUsuario, $_GET['id']);
+        try{
+            $inscricaoController->inscrever($idUsuario, $_GET['id']);
+
+            $eventoController->editar($_GET['id'], new Evento(
+                $evento["nome"],
+                $evento["data"],
+                $evento["local"],
+                ($evento["limite"] - 1)
+            ));
+        }catch(Exception $e){
+            echo "Usuário já inscrito neste evento <br>";
+        }
     }
 }else{
     $result = $inscricaoController->mostarTodasInscricoes($idUsuario);
@@ -71,8 +76,6 @@ if(isset($_GET['id'])){
     } else {
         echo "0 resultados";
     }
-
-    //echo "<br><a href='?acao=menu'> Voltar ao menu </a>";
 }
 
 ?>
