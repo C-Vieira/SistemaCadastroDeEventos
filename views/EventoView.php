@@ -9,9 +9,11 @@ require_once 'controllers/EventoController.php';
 $eventoController = new EventoController();
 $result = $eventoController->mostarTodosEventos();
 
+echo "<h2>Eventos</h2>";
+
 if ($result->num_rows > 0) {
 
-    echo "<br>
+    echo "
         <table border='2px'>
             <tr>
                 <th>ID</th>

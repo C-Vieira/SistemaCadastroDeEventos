@@ -36,9 +36,11 @@ if(isset($_GET['id'])){
 }else{
     $result = $inscricaoController->mostarTodasInscricoes($idUsuario);
 
+    echo "<h2>Inscrições</h2>";
+
     if ($result->num_rows > 0) {
         
-        echo "<br>
+        echo "
             <table border='2px'>
                 <tr>
                     <th>ID</th>

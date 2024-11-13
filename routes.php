@@ -46,7 +46,7 @@ if (isset($_GET['acao'])) {
             break;
     }
 } else {
-   echo "Sem ação selecionada";
+   //echo "Sem ação selecionada";
    include 'views/UserLogin.php';
 }
 ?>

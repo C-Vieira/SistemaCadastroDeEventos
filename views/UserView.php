@@ -8,9 +8,11 @@ require_once 'controllers/UsuarioController.php';
 $controller = new UsuarioController();
 $result = $controller->mostarTodosUsuarios();
 
+echo "<h2>Usuários</h2>";
+
 if ($result->num_rows > 0) {
     
-    echo "<br>
+    echo "
         <table border='2px'>
             <tr>
                 <th>ID</th>

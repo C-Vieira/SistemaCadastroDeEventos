@@ -12,7 +12,7 @@ class InscricaoDAO{
     
         $sql = "INSERT INTO inscricoes (user_id, evento_id) VALUES ('$idUsuario', '$idEvento')";
         if($connection->query($sql) === TRUE){
-            echo "<br> Novo Registro Criado com Sucesso!";
+            echo "<br> Novo Registro Criado com Sucesso! <br>";
         }else{
             echo "Erro: " . $sql . "<br>" . $connection->error;
         }

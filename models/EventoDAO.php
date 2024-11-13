@@ -31,10 +31,9 @@ class EventoDAO{
         $novoLocal = $evento->getLocal();
         $novoLimite = $evento->getLimite();
         
-        // TODO
         $sql = "UPDATE eventos SET nome='$novoNome', data='$novaData', local='$novoLocal', limite='$novoLimite' WHERE id=$id";
         if ($connection->query($sql) === TRUE) {
-            echo "<br> Registro atualizado com sucesso!";
+            echo "<br> Registro atualizado com sucesso! <br>";
         } else {
             echo "Erro: " . $sql . "<br>" . $connection->error;
         }
